@@ -36,3 +36,12 @@ class ProcessData:
         xScaled=self.scaler.fit_transform(x)
         joblib.dump(self.scaler,"scaler.pkl")
         return xScaled,y.values
+    
+#time series model
+class TimeSeriesModel(nn.Module):
+    def __init__(self,input):
+        super(TimeSeriesModel,self).__init__()
+        self.model=nn.Sequential(nn.Linear(input,128),nn.ReLU(),nn.Linear(128,128),nn.ReLu(),nn.Linear(128,1))
+
+    def forward(self,x):
+        return self.model(x)
